@@ -6,7 +6,7 @@ from .models import Game
 from .serializers import GameSerializer, GameSolutionSerializer
 
 
-@api_view(['GET', 'POST', 'PUT'])
+@api_view(['POST', 'PUT'])
 def game_view( request, game_id = None ):
     if request.method == 'POST':
         serializedGame = GameSerializer( data = {} )
@@ -26,9 +26,6 @@ def game_view( request, game_id = None ):
             serializedGame.save()
             return Response( serializedGame.data )
         return Response( serializedGame.errors, status = status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
-        serializedGame = GameSerializer( game )
-        return Response( serializedGame.data )
 
 @api_view(['GET'])
 def game_solution( request, game_id = None ):
